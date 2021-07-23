@@ -26,7 +26,7 @@ ALLEGRO_BITMAP **imagens = NULL;
 ALLEGRO_FONT *fontes[2];
 ALLEGRO_FONT *fonte1 = NULL;
 ALLEGRO_FONT *fonte2 = NULL;
-//ALLEGRO_SAMPLE* sample_Sons[4];
+ALLEGRO_SAMPLE* sample_Sons[4];
 ALLEGRO_BITMAP *vetImagens[3];
 
 
@@ -39,6 +39,14 @@ const int ALTURA_TELA = 700;
 float **matrizPosicoesX;
 float **matrizPosicoesY;
 struct bloco **matrizBlocos;
+
+void must_init(bool test, const char *description)
+{
+    if(test) return;
+
+    printf("couldn't initialize %s\n", description);
+    exit(1);
+}
 
 //Iniciando Jogo... Tela, Teclado e Imagem
 int inicializar(){
@@ -65,26 +73,27 @@ int inicializar(){
         return 0;
     }
 
-/*
+
     //audio
     al_install_audio();
     al_init_acodec_addon();
-    al_reserve_samples(50);
+    al_reserve_samples(16);
     
 
     //Vitoria
-    sample_Sons[0]= al_load_sample("Vitoria2.mp3"); 
+    sample_Sons[0]= al_load_sample("Vitoria2.wav"); 
     must_init(sample_Sons[0], "Vitoria2");
     // Derrota
-    sample_Sons[1]= al_load_sample("DerrotaTrombeta.mp3"); 
+    sample_Sons[1]= al_load_sample("DerrotaTrombeta.wav"); 
     must_init(sample_Sons[1], "DerrotaTrombeta");
     //Movimento
-    sample_Sons[2]= al_load_sample("Movimento.mp3");
+    sample_Sons[2]= al_load_sample("Movimento.wav");
     must_init(sample_Sons[2], "Movimento");
     //junta Bloco
-    sample_Sons[3]= al_load_sample("BlocoAumenta.mp3");
+    sample_Sons[3]= al_load_sample("BlocoAumenta.wav");
     must_init(sample_Sons[3], "BlocoAumenta");
-    */
+    
+
     //Criação da janela
     disp = al_create_display(LARGURA_TELA, ALTURA_TELA);  // inicializando display
     if (!disp)  {
