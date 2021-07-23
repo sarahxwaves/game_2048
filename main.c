@@ -2,11 +2,16 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
 #include "inicio.c"
+
+int test =1;
+
 int main(){
     int sair = 0;
     int tecla = 0;
@@ -30,6 +35,30 @@ int main(){
     constante = 0;
 
     while (!sair){
+
+//Movimentos randomicos
+/*
+        if(!verificaJogoAcabou()) {
+                tecla = 1+ constante%4;
+                constante++;
+            }
+        while(!al_is_event_queue_empty(fila_eventos)) {
+            ALLEGRO_EVENT evento;
+            al_wait_for_event(fila_eventos, &evento);
+            if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
+                switch(evento.keyboard.keycode) {
+                    case ALLEGRO_KEY_ENTER:
+                        reiniciar();
+                        break;
+                    case ALLEGRO_KEY_ESCAPE:
+                        sair = true;
+                        break;
+                }
+            } else if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+                sair = true;
+            }
+        }
+     */   
 
         while(!al_is_event_queue_empty(fila_eventos)) { //enquanto tiver evento executa
             ALLEGRO_EVENT evento;
@@ -97,29 +126,17 @@ int main(){
                 imprimeBlocos();
             }
             tecla = 0;
-        fim = verificaJogoAcabou();
+
+            fim = verificaJogoAcabou();
+            
 
             if(fim) {
                 if(fim == 1) {
-                    al_draw_text(fonte1, al_map_rgb(0, 0, 0), LARGURA_TELA / 2,
-                    ALTURA_TELA * 0.2,
-                    ALLEGRO_ALIGN_CENTRE, "Jogo acabou!");
-                    al_draw_text(fonte1, al_map_rgb(0, 0, 0), LARGURA_TELA / 2,
-                    ALTURA_TELA * 0.4,
-                    ALLEGRO_ALIGN_CENTRE, "Aperte enter para");
-                    al_draw_text(fonte1, al_map_rgb(0, 0, 0), LARGURA_TELA / 2,
-                    ALTURA_TELA * 0.6,
-                    ALLEGRO_ALIGN_CENTRE, "reiniciar");
+                    al_draw_bitmap(vetImagens[2], 0, 0, 0), LARGURA_TELA / 2, ALTURA_TELA *0.2, ALLEGRO_ALIGN_CENTRE;
+                    al_draw_bitmap(vetImagens[1], 0, 0, 0), LARGURA_TELA / 2, ALTURA_TELA *0.6, ALLEGRO_ALIGN_CENTRE;
                 }else {
-                    al_draw_text(fonte1, al_map_rgb(0, 0, 0), LARGURA_TELA / 2,
-                    ALTURA_TELA * 0.2,
-                    ALLEGRO_ALIGN_CENTRE, "Voce venceu!");
-                    al_draw_text(fonte1, al_map_rgb(0, 0, 0), LARGURA_TELA / 2,
-                    ALTURA_TELA * 0.4,
-                    ALLEGRO_ALIGN_CENTRE, "Aperte enter para");
-                    al_draw_text(fonte1, al_map_rgb(0, 0, 0), LARGURA_TELA / 2,
-                    ALTURA_TELA * 0.6,
-                    ALLEGRO_ALIGN_CENTRE, "reiniciar");
+                    al_draw_bitmap(vetImagens[0], 0, 0, 0), LARGURA_TELA / 2, ALTURA_TELA *0.2, ALLEGRO_ALIGN_CENTRE;
+                    al_draw_bitmap(vetImagens[1], 0, 0, 0), LARGURA_TELA / 2, ALTURA_TELA *0.6, ALLEGRO_ALIGN_CENTRE;
                 }
             }
         }
