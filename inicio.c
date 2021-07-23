@@ -26,7 +26,7 @@ ALLEGRO_BITMAP **imagens = NULL;
 ALLEGRO_FONT *fontes[2];
 ALLEGRO_FONT *fonte1 = NULL;
 ALLEGRO_FONT *fonte2 = NULL;
-ALLEGRO_SAMPLE* sample_Sons[4];
+ALLEGRO_SAMPLE *sample_Sons[4];
 ALLEGRO_BITMAP *vetImagens[3];
 
 
@@ -81,16 +81,16 @@ int inicializar(){
     
 
     //Vitoria
-    sample_Sons[0]= al_load_sample("Vitoria2.wav"); 
+    sample_Sons[0]= al_load_sample("Sons/Vitoria2.wav"); 
     must_init(sample_Sons[0], "Vitoria2");
     // Derrota
-    sample_Sons[1]= al_load_sample("DerrotaTrombeta.wav"); 
+    sample_Sons[1]= al_load_sample("Sons/DerrotaTrombeta.wav"); 
     must_init(sample_Sons[1], "DerrotaTrombeta");
     //Movimento
-    sample_Sons[2]= al_load_sample("Movimento.wav");
+    sample_Sons[2]= al_load_sample("Sons/Movimento.wav");
     must_init(sample_Sons[2], "Movimento");
     //junta Bloco
-    sample_Sons[3]= al_load_sample("BlocoAumenta.wav");
+    sample_Sons[3]= al_load_sample("Sons/BlocoAumenta.wav");
     must_init(sample_Sons[3], "BlocoAumenta");
     
 
@@ -402,6 +402,7 @@ int movimentoCima() {
         imprimeBlocos();
         al_flip_display();
     }
+        al_play_sample(sample_Sons[2],0.2,0,1,ALLEGRO_PLAYMODE_ONCE,NULL);
     return validaMovimento;
 }
 
@@ -442,6 +443,7 @@ int movimentoBaixo() {
         imprimeBlocos();
         al_flip_display();
     }
+        al_play_sample(sample_Sons[2],0.2,0,1,ALLEGRO_PLAYMODE_ONCE,NULL);
     return validaMovimento;
 }
 
@@ -482,6 +484,7 @@ int movimentoEsquerda() {
         imprimeBlocos();
         al_flip_display();
     }
+        al_play_sample(sample_Sons[2],0.2,0,1,ALLEGRO_PLAYMODE_ONCE,NULL);
     return validaMovimento;
 }
 
@@ -523,6 +526,7 @@ int movimentoDireita() {
         imprimeBlocos();
         al_flip_display();
     }
+        al_play_sample(sample_Sons[2],0.2,0,1,ALLEGRO_PLAYMODE_ONCE,NULL);
     return validaMovimento; 
 }
 
