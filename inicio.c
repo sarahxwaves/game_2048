@@ -2,9 +2,12 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 
 // 16 blocos
 struct bloco {
@@ -20,8 +23,12 @@ ALLEGRO_DISPLAY *disp = NULL;  //janela
 ALLEGRO_BITMAP *fundo = NULL;  //fundo
 ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 ALLEGRO_BITMAP **imagens = NULL;
+ALLEGRO_FONT *fontes[2];
 ALLEGRO_FONT *fonte1 = NULL;
 ALLEGRO_FONT *fonte2 = NULL;
+//ALLEGRO_SAMPLE* sample_Sons[4];
+ALLEGRO_BITMAP *vetImagens[3];
+
 
 //Tela, teclado, imagem e sons
 const float VELOCIDADE = 4;
@@ -57,7 +64,27 @@ int inicializar(){
         fprintf(stderr,"%s", "Falha ao inicializar add-on allegro_ttf.\n");
         return 0;
     }
+
+/*
+    //audio
+    al_install_audio();
+    al_init_acodec_addon();
+    al_reserve_samples(50);
     
+
+    //Vitoria
+    sample_Sons[0]= al_load_sample("Vitoria2.mp3"); 
+    must_init(sample_Sons[0], "Vitoria2");
+    // Derrota
+    sample_Sons[1]= al_load_sample("DerrotaTrombeta.mp3"); 
+    must_init(sample_Sons[1], "DerrotaTrombeta");
+    //Movimento
+    sample_Sons[2]= al_load_sample("Movimento.mp3");
+    must_init(sample_Sons[2], "Movimento");
+    //junta Bloco
+    sample_Sons[3]= al_load_sample("BlocoAumenta.mp3");
+    must_init(sample_Sons[3], "BlocoAumenta");
+    */
     //Criação da janela
     disp = al_create_display(LARGURA_TELA, ALTURA_TELA);  // inicializando display
     if (!disp)  {
@@ -65,6 +92,13 @@ int inicializar(){
         return 1;
     }
 
+    fontes[0] = al_load_font("fontes/babyblocks.ttf", 72, 0);
+    fontes[1] = al_load_font("fontes/8-bitArcadeOut.ttf", 72, 0);
+    if (!fontes) {
+        fprintf(stderr,"%s", "Falha ao carregar a fonte\n");
+        al_destroy_display(disp);
+        return 0;
+    }
 
     fonte1 = al_load_font("fontes/babyblocks.ttf", 72, 0);
     if (!fonte1) {
@@ -91,6 +125,18 @@ int inicializar(){
 
     fundo = al_load_bitmap("imagens/fundo.png"); //imagem de fundo
     if (!fundo)  {
+        fprintf(stderr,"%s", "Falha ao carregar imagem de fundo.\n");
+        al_destroy_display(disp);
+        al_destroy_event_queue(fila_eventos);
+        return 1;
+    }
+
+    //imagens
+    vetImagens[0] = al_load_bitmap("imagens/Venceu.png"); 
+    vetImagens[1] = al_load_bitmap("imagens/Continuar.png"); 
+    vetImagens[2] = al_load_bitmap("imagens/Perdeu.png"); 
+
+    if (!vetImagens){
         fprintf(stderr,"%s", "Falha ao carregar imagem de fundo.\n");
         al_destroy_display(disp);
         al_destroy_event_queue(fila_eventos);
@@ -195,8 +241,9 @@ void preencheMatrizBlocos(){ //matriz 4x4
     }
 }
 
-void iniciaImagens(){ //vetor com as imagens utilizadas
-    imagens = malloc(sizeof(ALLEGRO_BITMAP*)*13);
+//vetor com as imagens blocos
+void iniciaImagens(){ 
+    imagens = malloc(sizeof(ALLEGRO_BITMAP*)*11);
     *imagens = al_load_bitmap("imagens/img_2.png");
     *(imagens+1) = al_load_bitmap("imagens/img_4.png");
     *(imagens+2) = al_load_bitmap("imagens/img_8.png");
@@ -208,8 +255,6 @@ void iniciaImagens(){ //vetor com as imagens utilizadas
     *(imagens+8) = al_load_bitmap("imagens/img_512.png");
     *(imagens+9) = al_load_bitmap("imagens/img_1024.png");
     *(imagens+10) = al_load_bitmap("imagens/img_2048.png");
-    *(imagens+11) = al_load_bitmap("imagens/Continuar.png");
-    *(imagens+12) = al_load_bitmap("imagens/Venceu.png");
 }
 
 //FUNÇÕES:
