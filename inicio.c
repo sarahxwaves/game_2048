@@ -626,13 +626,3 @@ void novoBloco() {
     (*(*(matrizBlocos+x)+y)) = novo;
     return novo;
 };
-
-
-void loopReiniciar(){
-    int k =0;
-    while (k != 100){
-        sleep(3);
-        al_draw_bitmap(vetImagens[1], 0, 0, 0), LARGURA_TELA / 2, ALTURA_TELA *0.6, ALLEGRO_ALIGN_CENTRE;
-        k++;
-    }
-}

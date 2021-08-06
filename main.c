@@ -135,9 +135,10 @@ int main(){
             if(fim) {
                 if(fim == 1) {
                     al_draw_bitmap(vetImagens[2], 0, 0, 0), LARGURA_TELA / 2, ALTURA_TELA *0.2, ALLEGRO_ALIGN_CENTRE;
-                    //al_draw_bitmap(vetImagens[1], 0, 0, 0), LARGURA_TELA / 2, ALTURA_TELA *0.6, ALLEGRO_ALIGN_CENTRE;
+                    al_draw_bitmap(vetImagens[1], 0, 0, 0), LARGURA_TELA / 2, ALTURA_TELA *0.6, ALLEGRO_ALIGN_CENTRE;
 
                     al_play_sample(sample_Sons[1],0.75,0,1,ALLEGRO_PLAYMODE_ONCE,NULL);
+                    
                 }else {
                     al_draw_bitmap(vetImagens[0], 0, 0, 0), LARGURA_TELA / 2, ALTURA_TELA *0.2, ALLEGRO_ALIGN_CENTRE; 
                     al_draw_bitmap(vetImagens[1], 0, 0, 0), LARGURA_TELA / 2, ALTURA_TELA *0.6, ALLEGRO_ALIGN_CENTRE;
@@ -148,6 +149,7 @@ int main(){
             }
         }
 
+        
         al_flip_display();
     }
 
