@@ -626,3 +626,7 @@ void novoBloco() {
     (*(*(matrizBlocos+x)+y)) = novo;
     return novo;
 };
+
+int timer =0;
+
+void tempo(){timer++;}

@@ -12,8 +12,6 @@
 
 #include "inicio.c"
 
-int test =1;
-
 int main(){
     int sair = 0;
     int tecla = 0;
@@ -148,8 +146,6 @@ int main(){
                 }
             }
         }
-
-        
         al_flip_display();
     }
 
