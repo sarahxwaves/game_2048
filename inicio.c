@@ -23,15 +23,15 @@ ALLEGRO_DISPLAY *disp = NULL;  //janela
 ALLEGRO_BITMAP *fundo = NULL;  //fundo
 ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 ALLEGRO_BITMAP **imagens = NULL;
-ALLEGRO_FONT *fontes[2];
-ALLEGRO_FONT *fonte1 = NULL;
-ALLEGRO_FONT *fonte2 = NULL;
+ALLEGRO_FONT *fontes[2]; // não usado
+ALLEGRO_FONT *fonte1 = NULL; // não usado
+ALLEGRO_FONT *fonte2 = NULL; // não usado
 ALLEGRO_SAMPLE *sample_Sons[4];
 ALLEGRO_BITMAP *vetImagens[3];
 
 
 //Tela, teclado, imagem e sons
-const float VELOCIDADE = 4;
+const float VELOCIDADE = 4; // velocidade de movimentação do Bloco
 const int LARGURA_TELA = 700;
 const int ALTURA_TELA = 700;
 
