@@ -147,6 +147,6 @@ while (!sair){
         }
         al_flip_display();
     }
-
+    al_stop_sample(sample_Sons);
     return 0;
 }    
