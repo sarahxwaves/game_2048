@@ -34,7 +34,7 @@ int main(){
     imprimeBlocos();
     constante = 0;
 
-    while (!sair){
+while (!sair){
 
 //Movimentos randomicos
 /*
@@ -58,8 +58,7 @@ int main(){
                 sair = true;
             }
         }
-     */
-
+*/
         while(!al_is_event_queue_empty(fila_eventos)) { //enquanto tiver evento executa
             ALLEGRO_EVENT evento;
 
